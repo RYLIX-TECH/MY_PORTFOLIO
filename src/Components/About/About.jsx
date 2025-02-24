@@ -13,7 +13,7 @@ const About = () => {
  transition={{type:'spring',stiffness:"120",damping:"20",
   duration:'1'
  }}
- 
+
  viewport={{once:true}}
   className="about section" id="About">
     <h2 className="section__title">About Me</h2>
@@ -29,8 +29,6 @@ const About = () => {
             <a download ="" href="https://1drv.ms/w/s!AomcZBq8dYxnfNoudAnbIQiO5vQ?e=rZLjWI" className="button button--flex"> Download CV </a>
         </div>
     </div>
-    
-
  </motion.section>
   )
 }

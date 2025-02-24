@@ -87,7 +87,9 @@
     padding: 0.25rem;
     background: var(--body-color);
     z-index: 10;
+    text-transform: capitalize;
 }
+
 .contact__form-area{
     height: 11rem;
 }

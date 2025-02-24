@@ -16,13 +16,23 @@ const Qualification = () => {
     
   return (
     <motion.section 
-    initial={{opacity: 0,  y:100}}
+    // initial={{opacity: 0,  y:100}}
+    // whileInView={{opacity:1, y:0}}
+    // transition={{type:'spring',stiffness:"120",damping:"20" ,duration:1,delay:0.2}}
+    className="qualification section">
+      <motion.h2
+      initial={{opacity: 0,  y:100}}
     whileInView={{opacity:1, y:0}}
     transition={{type:'spring',stiffness:"120",damping:"20" ,duration:1,delay:0.2}}
+    viewport={{once:true}}
+       className="section__title">Qualification</motion.h2>
+      <motion.span
+      initial={{opacity: 0,  y:100}}
+    whileInView={{opacity:1, y:0}}
+    transition={{type:'spring',stiffness:"120",damping:"20" ,duration:1,delay:0.4}}
+    viewport={{once:true}}
 
-    className="qualification section">
-      <h2 className="section__title">Qualification</h2>
-      <span className="section__subtitle">My personal journey</span>
+       className="section__subtitle">My personal journey</motion.span>
 
       <div className="qualification__container container">
         <div className="qualification__tabs">
@@ -45,7 +55,7 @@ const Qualification = () => {
           <motion.div 
           initial={{opacity: 0,  y:100}}
           whileInView={{opacity:1, y:0}}
-          transition={{type:'spring',stiffness:"120",damping:"20" ,duration:1,delay:0.4}}
+          transition={{type:'spring',stiffness:"120",damping:"20" ,duration:1,delay:0.6}}
           
           className={toggleState === 1 ? "qualification__content qualification__content-active" :'qualification__content'}>
             <div className="qualification__data">
@@ -121,7 +131,12 @@ const Qualification = () => {
               </div>
             </div>
           </motion.div>
-          <div className={toggleState === 2 ? "qualification__content qualification__content-active" :'qualification__content'} >
+          <motion.div
+           
+           initial={{opacity: 0,  y:100}}
+           whileInView={{opacity:1, y:0}} 
+           transition={{type:'tween',stiffness:"80",damping:"20" ,duration:1,delay:0.6}}
+          className={toggleState === 2 ? "qualification__content qualification__content-active" :'qualification__content'} >
             <div className="qualification__data">
               <div>
                 <h3 className="qualification__title">product Designer</h3>
@@ -176,7 +191,7 @@ const Qualification = () => {
             </div>
 
             
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.section>

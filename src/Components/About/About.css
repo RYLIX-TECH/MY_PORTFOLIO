@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* gap: 3rem; */
+  gap: 3rem;
   flex-direction: column;
 }
 
@@ -17,6 +17,10 @@
   width: 350px;
   border-radius: 1.5rem;
   justify-self: center;
+}
+.about__container img{
+  border-radius: 5px;
+  
 }
 .about__info {
   grid-template-columns: repeat(3, 140px);

@@ -34,10 +34,14 @@ const StyledWrapper = styled.div`
     --size-of-icon: 1.4em;
     /* it is like a inline-padding of switch */
     --slider-offset: 0.3em;
-    position: relative;
+    position: fixed;
+    right:10px;
+    top:3rem;
+    z-index:100;
     width: var(--width-of-switch);
     height: var(--height-of-switch);
   }
+    
 
   /* Hide default HTML checkbox */
   .switch input {

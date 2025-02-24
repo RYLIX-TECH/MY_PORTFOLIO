@@ -27,7 +27,7 @@ const Contact = () => {
     };
   
     // Send email using EmailJS 
-    console.log(formData); // Checking the form data in the console for debugging
+    // console.log(formData); // Checking the form data in the console for debugging
   
     emailjs.send('service_3x622o2', 'template_mcmcixg', templateParams, 'A02LoOILweqDkxDS0')
       .then(() => {
@@ -36,7 +36,7 @@ const Contact = () => {
       })
       .catch((err) => {
         setError('Failed to send message. Please try again later.');
-        console.error('Email sending failed:', err);
+        console.error('Email sending failed', err);
       })
       .finally(() => setLoading(false));
   };
@@ -60,7 +60,8 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: -100 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.1 }}
+              transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.1 }}
+              viewport={{once:true}}
             className="contact__info">
             <div className="contact__card">
               <i className="bx bx contact__card-icon"></i>
@@ -76,6 +77,7 @@ const Contact = () => {
               initial={{ opacity: 0, y: -100 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.3 }}
+                viewport={{once:true}}
               className="contact__card">
               <i className="bx bx-mail-send contact__card-icon"></i>
               <h3 className="contact__card-title">Email</h3>
@@ -90,6 +92,8 @@ const Contact = () => {
               initial={{ opacity: 0, y: -100 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.5 }}
+              viewport={{once:true}}
+
               className="contact__card">
               <i className="bx bxl-whatsapp contact__card-icon"></i>
               <h3 className="contact__card-title">Whatsapp</h3>
@@ -104,6 +108,7 @@ const Contact = () => {
               initial={{ opacity: 0, y: -100 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.6 }}
+              viewport={{once:true}}
               className="contact__card">
               <i className="bx bxl-messenger contact__card-icon"></i>
               <h3 className="contact__card-title">messenger</h3>
@@ -121,6 +126,8 @@ const Contact = () => {
           initial={{ opacity: 0, y: -100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.7 }}
+          viewport={{once:true}}
+
           className="contact__content">
           <h3 className="contact__title">write to me your project</h3>
           <form onSubmit={handleSubmit} id="contactForm" className="contact__form">
@@ -132,7 +139,7 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 className="contact__form-input"
-                placeholder="insert your name"
+                placeholder="Insert Your Name"
                 required
               />
             </div>
@@ -145,7 +152,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className="contact__form-input"
-                placeholder="insert your email"
+                placeholder="Insert Your Email"
                 required
               />
             </div>
@@ -158,7 +165,7 @@ const Contact = () => {
                 cols="30"
                 rows="10"
                 className="contact__form-input"
-                placeholder="input your project"
+                placeholder="Input Your Project"
                 required
               ></textarea>
             </div>
@@ -172,7 +179,9 @@ const Contact = () => {
             </button>
           </form>
           {success && (
-            <div className="success-message">Message sent successfully!</div>
+            <div className="success-message">Message sent successfully!
+              <i className="bx bxs-success"></i>
+            </div>
           )}
           {error && (
             <div className="error-message">{error}</div>

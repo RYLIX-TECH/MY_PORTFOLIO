@@ -9,10 +9,6 @@ const Data = () => {
         <h3 className='home__subtitle'> web Designer</h3>
         <p className="home__description">Passionate about creating clean, modern, and responsive websites that deliver exceptional user experiences. I specialize in front-end design and development, helping brands bring their ideas to life online.
         .</p>
-
-        {/* <a href="#contact" className="button button--flex">
-            say hello <i className='bx bxs-send'></i>
-        </a> */}
         <Button/>
     </div>
   )

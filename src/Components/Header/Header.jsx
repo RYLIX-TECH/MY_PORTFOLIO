@@ -1,10 +1,23 @@
-import { useState,} from 'react'
+import { useState,useRef, useEffect} from 'react'
 import { motion } from "motion/react"
 import "./Header.css"
-import Switch from '../Button/Switch'
 const Header = () => {
     // ===========  toggle menu ====================//
     const[Toggle,showMenu] = useState(false);
+    const navRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (navRef.current && !navRef.current.contains(event.target)) {
+                showMenu(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [Toggle]);
 
   return (
    <motion.header
@@ -12,7 +25,7 @@ const Header = () => {
    animate={{y:0 ,opacity:1}}
          
          className="header">
-    <nav className="nav container">
+    <nav  ref= {navRef}className="nav container">
         <a href="index.html" className="nav__logo">RYLIX</a>
 
 
@@ -54,7 +67,7 @@ const Header = () => {
                     </a>
                 </li>
                 <li className="nav__item">
-                    <Switch />
+                    {/* <Switch /> */}
                 </li>
                 
 
