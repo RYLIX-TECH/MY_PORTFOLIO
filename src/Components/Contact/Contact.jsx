@@ -3,6 +3,50 @@ import { motion } from 'motion/react';
 import emailjs from 'emailjs-com';
 import { useState } from 'react';
 
+/**
+ * @function Contact
+ * @description A React component that renders a contact form and contact information.
+ * It allows users to send a message via email using EmailJS.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} The Contact component.
+ *
+ * @example
+ * // Usage:
+ * <Contact />
+ *
+ * @requires react
+ * @requires emailjs-com
+ * @requires framer-motion
+ *
+ * @state {boolean} loading - Indicates whether the form is currently submitting.
+ * @state {boolean} success - Indicates whether the form submission was successful.
+ * @state {string} error - Stores any error message that occurred during form submission.
+ * @state {object} formData - Stores the form data (name, email, project).
+ *
+ * @method handleSubmit - Handles the form submission. Prevents default form submission behavior,
+ * sets the loading state to true, and sends the form data via EmailJS. Updates the success or error state
+ * based on the EmailJS response.
+ * @param {object} e - The event object.
+ *
+ * @method handleChange - Handles changes to the form input fields. Updates the corresponding
+ * field in the formData state.
+ * @param {object} e - The event object.
+ *
+ * @property {string} formData.name - The name entered in the form.
+ * @property {string} formData.email - The email entered in the form.
+ * @property {string} formData.project - The project description entered in the form.
+ *
+ * @property {function} emailjs.send - The EmailJS function to send the email.
+ * @param {string} service_3x622o2 - The EmailJS service ID.
+ * @param {string} template_mcmcixg - The EmailJS template ID.
+ * @param {object} templateParams - The parameters to pass to the EmailJS template.
+ * @param {string} A02LoOILweqDkxDS0 - The EmailJS public key.
+ *
+ * @returns {JSX.Element} A section containing contact information and a form to submit project details.
+ * Includes success and error messages based on form submission status.
+ */
 const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);

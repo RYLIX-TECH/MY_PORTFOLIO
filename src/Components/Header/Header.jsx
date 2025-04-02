@@ -1,11 +1,49 @@
 import { useState,useRef, useEffect} from 'react'
 import { motion } from "motion/react"
 import "./Header.css"
+/**
+ * @file Header.jsx
+ * @module Header
+ */
+
+
+
+/**
+ * @function Header
+ * @description A functional component that renders the header section of the portfolio, including the navigation menu.
+ * It handles the display and hiding of the navigation menu on smaller screens.
+ * @returns {JSX.Element} The Header component.
+ */
 const Header = () => {
-    // ===========  toggle menu ====================//
-    const[Toggle,showMenu] = useState(false);
+    /**
+     * @typedef {object} ToggleState
+     * @property {boolean} Toggle - Represents the visibility state of the navigation menu.
+     */
+
+    /**
+     * @typedef {function} ShowMenu
+     * @param {boolean} toggle - The new visibility state of the navigation menu.
+     * @returns {void}
+     */
+
+    /**
+     * @description useState hook to manage the visibility of the navigation menu.
+     * @type {[ToggleState, ShowMenu]}
+     */
+    const [Toggle, showMenu] = useState(false);
+
+    /**
+     * @description useRef hook to create a reference to the navigation element.
+     * @type {React.RefObject<HTMLElement>}
+     */
     const navRef = useRef(null);
 
+    /**
+     * @function handleClickOutside
+     * @description An event handler that closes the navigation menu when a click occurs outside of it.
+     * @param {MouseEvent} event - The click event.
+     * @returns {void}
+     */
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (navRef.current && !navRef.current.contains(event.target)) {

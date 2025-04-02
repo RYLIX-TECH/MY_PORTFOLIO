@@ -2,6 +2,11 @@ import React from 'react'
 import Button from '../Button/Button'
 
 
+/**
+ * @function Data
+ * @description A React component that renders the hero section data for a portfolio.
+ * @returns {JSX.Element} A div containing the title, subtitle, description, and a Button component.
+ */
 const Data = () => {
   return (
     <div className="home__data">
