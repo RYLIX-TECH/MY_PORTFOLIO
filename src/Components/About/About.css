@@ -72,6 +72,9 @@ justify-content: center;
   }
   .about__img {
     width: 220px;
+    img{
+      width: 220px;
+    }
   }
   .about__box {
     padding: 0.75rem 0.5rem;
@@ -94,9 +97,15 @@ justify-content: center;
   .about__description {
     padding: 0;
   }
+  .about__img{
+    width: 200px;
+  }
 }
 @media screen and (max-width: 350px) {
     .about__info{
         grid-template-columns: repeat(2,1fr);
+    }
+    .about__img{
+      width: 150px;
     }
 }

@@ -17,21 +17,29 @@ function App() {
   const [review, setReview] = useState("");
 
   useEffect(() => {
-    // Show notification after 5 seconds if review doesn't exist
-    const existingReview = localStorage.getItem("websiteReviews");
-    if (!existingReview) {
-      const timeout = setTimeout(() => {
-        setIsNotified(true);
-      }, 30000);
+    try {
+      const existingReview = localStorage.getItem("websiteReviews");
+      if (!existingReview) {
+        const timeout = setTimeout(() => {
+          setIsNotified(true);
+        }, 30000);
 
-      return () => clearTimeout(timeout);
+        return () => clearTimeout(timeout);
+      }
+    } catch (error) {
+      console.error("Error accessing localStorage:", error);
     }
   }, []);
 
   const handleReviewSubmit = () => {
     if (review.trim()) {
-      localStorage.setItem("websiteReviews", review);
-      setIsNotified(false);
+      try {
+        const sanitizedReview = review.replace(/[^a-zA-Z0-9\s]/g, ""); // Sanitize input
+        localStorage.setItem("websiteReviews", sanitizedReview);
+        setIsNotified(false);
+      } catch (error) {
+        console.error("Error saving review to localStorage:", error);
+      }
     }
   };
 

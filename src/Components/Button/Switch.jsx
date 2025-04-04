@@ -1,30 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
 const Switch = () => {
   const [isToggled, setIsToggled] = useState(false);
 
   useEffect(() => {
-    // Retrieve the dark mode state from localStorage on component mount
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
     setIsToggled(savedDarkMode);
-
-    // Apply the dark mode class to the body if saved state is true
-    if (savedDarkMode) {
-      document.querySelector('body').classList.add('dark__mode');
-    }
+    document.body.classList.toggle('dark__mode', savedDarkMode);
   }, []);
 
-  const toggleNav = () => {
+  const toggleNav = useCallback(() => {
     const newToggledState = !isToggled;
     setIsToggled(newToggledState);
-
-    // Save the new state to localStorage
     localStorage.setItem('darkMode', newToggledState);
-
-    // Toggle the dark mode class on the body
-    document.querySelector('body').classList.toggle('dark__mode');
-  };
+    document.body.classList.toggle('dark__mode', newToggledState);
+  }, [isToggled]);
 
   return (
     <StyledWrapper>

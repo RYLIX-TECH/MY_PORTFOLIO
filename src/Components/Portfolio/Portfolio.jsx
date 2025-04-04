@@ -1,73 +1,39 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import './Portfolio.css'
-import { motion, spring } from 'framer-motion'
+import { motion } from 'framer-motion'
+
 const Portfolio = () => {
+  const projects = useMemo(() => [
+    { id: 1, className: 'container__one', delay: 0.2 },
+    { id: 2, className: 'container__Two', delay: 0.2 },
+    { id: 3, className: 'container__Three', delay: 0.3 },
+    { id: 4, className: 'container__Four', delay: 0.4 },
+  ], []);
+
   return (
-    
     <div>
-      <section  className='portfolio__container'  id='portfolio' >
-
-      <h1 className='section__title'>Top Projects</h1>
-      <div className="portfolio__content" >
-        <div className="content__items">
-            <motion.div
-            initial={{opacity:0,Y:20}}
-            transition={{duration:0.5,delay:0.2,type:'tween'}}
-            whileInView={{opacity:1,x:0}}
-            className="container__item">
-              <div className="container__one">
-
-              </div>
-              <div className="visit__site">
-                <a href="#">Financier
-                <i className="bx bx-right-arrow-alt contact__button-icon"></i>
-                </a>
-                </div> 
-            </motion.div>
-            <motion.div
-             initial={{opacity:0,Y:100}}
-             transition={{duration:1,delay:0.2,type:'tween'}}
-             whileInView={{opacity:1,Y:0}}
-             className="container__item">
-              <div className="container__Two">
-
-              </div>
-              <div className="visit__site">
-              <a href="#">Financier
-              <i className="bx bx-right-arrow-alt contact__button-icon"></i>
-              </a>
-                </div> 
-            </motion.div>
-            <motion.div
-            initial={{opacity:0,Y:100}}
-            transition={{duration:1.2,delay:0.3,type:'tween'}}
-            whileInView={{opacity:1,Y:0}}
-             className="container__item">
-              <div className="container__Three">
-
-              </div>
-              <div className="visit__site">
-              <a href="#">Financier
-              <i className="bx bx-right-arrow-alt contact__button-icon"></i>
-              </a>
-                </div> 
-            </motion.div>
-            <motion.div
-            initial={{opacity:0,Y:100}}
-            transition={{duration:1.4,delay:0.4,type:spring}}
-            whileInView={{opacity:1,Y:0}} className="container__item">
-              <div className="container__Four">
-
-              </div>
-              <div className="visit__site">
-              <a href="#">Financier
-              <i className="bx bx-right-arrow-alt contact__button-icon"></i>
-              </a>
-                </div> 
-            </motion.div>
-           
+      <section className='portfolio__container' id='portfolio'>
+        <h1 className='section__title'>Top Projects</h1>
+        <div className="portfolio__content">
+          <div className="content__items">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 100 }}
+                transition={{ duration: 1 + index * 0.2, delay: project.delay, type: 'tween' }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="container__item"
+              >
+                <div className={project.className}></div>
+                <div className="visit__site">
+                  <a href="#">Financier
+                    <i className="bx bx-right-arrow-alt contact__button-icon"></i>
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
       </section>
     </div>
   )

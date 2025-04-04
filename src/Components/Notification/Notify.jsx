@@ -1,26 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const Notify = () => {
   const [isShown, setIsShown] = useState(false);
 
-  // Check if notification has been shown before
-  const hasBeenShown = localStorage.getItem('notificationShown') === 'true';
-
-  // Show notification after 5 seconds
   useEffect(() => {
-    if (!hasBeenShown) {
+    if (!localStorage.getItem('notificationShown')) {
       const timeout = setTimeout(() => {
         setIsShown(true);
       }, 5000);
 
       return () => clearTimeout(timeout);
     }
-  }, [hasBeenShown]);
+  }, []);
 
-  const handleResponse = (response) => {
-    localStorage.setItem('notificationReply', response);
+  const handleResponse = useCallback((response) => {
+    const sanitizedResponse = response.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    localStorage.setItem('notificationReply', sanitizedResponse);
     setIsShown(false);
-  };
+  }, []);
 
   const handleDismiss = () => {
     setIsShown(false);
