@@ -1,7 +1,9 @@
-import './Contact.css';
-import { motion } from 'motion/react';
-import emailjs from 'emailjs-com';
-import React, { useState, useCallback, useMemo } from 'react';
+/** @format */
+
+import "./Contact.css";
+import { motion } from "motion/react";
+import emailjs from "emailjs-com";
+import React, { useState, useCallback, useMemo } from "react";
 
 /**
  * @function Contact
@@ -50,55 +52,73 @@ import React, { useState, useCallback, useMemo } from 'react';
 const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    project: ''
+    name: "",
+    email: "",
+    project: "",
   });
 
-  const sanitizedData = useMemo(() => ({
-    from_name: formData.name.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-    from_email: formData.email.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-    project_description: formData.project.replace(/</g, "&lt;").replace(/>/g, "&gt;")
-  }), [formData]);
+  const sanitizedData = useMemo(
+    () => ({
+      from_name: formData.name.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+      from_email: formData.email.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+      project_description: formData.project
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;"),
+    }),
+    [formData]
+  );
 
-  const handleSubmit = useCallback((e) => {
-    e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.project.trim()) {
-      setError('All fields are required.');
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setError('Invalid email format.');
-      return;
-    }
-    setLoading(true);
-    setError('');
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (
+        !formData.name.trim() ||
+        !formData.email.trim() ||
+        !formData.project.trim()
+      ) {
+        setError("All fields are required.");
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        setError("Invalid email format.");
+        return;
+      }
+      setLoading(true);
+      setError("");
 
-    emailjs.send(
-      import.meta.env.VITE_REACT_APP_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_REACT_APP_EMAILJS_TEMPLATE_ID,
-      sanitizedData,
-      `${import.meta.env.VITE_REACT_APP_EMAILJS_PUBLIC_KEY}`
-    )
-      .then(() => {
-        setSuccess(true);
-        setFormData({ name: '', email: '', project: '' });
-      })
-      .catch((err) => {
-        setError('Failed to send message. Please check your internet connection.');
-        console.error('Email sending failed', err);
-      })
-      .finally(() => setLoading(false));
-  }, [sanitizedData, formData]);
+      emailjs
+        .send(
+          import.meta.env.VITE_REACT_APP_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_REACT_APP_EMAILJS_TEMPLATE_ID,
+          sanitizedData,
+          `${import.meta.env.VITE_REACT_APP_EMAILJS_PUBLIC_KEY}`
+        )
+        .then(() => {
+          setSuccess(true);
+          setFormData({ name: "", email: "", project: "" });
+        })
+        .catch((err) => {
+          setError(
+            "Failed to send message. Please check your internet connection."
+          );
+          console.error("Email sending failed", err);
+        })
+        .finally(() => setLoading(false));
+    },
+    [sanitizedData, formData]
+  );
 
-  const handleChange = useCallback((e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  }, [formData]);
+  const handleChange = useCallback(
+    (e) => {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    },
+    [formData]
+  );
 
   return (
     <section className="contact section" id="contact">
@@ -111,9 +131,16 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: -100 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.1 }}
+            transition={{
+              type: "spring",
+              stiffness: 120,
+              damping: 20,
+              duration: 1,
+              delay: 0.1,
+            }}
             viewport={{ once: true }}
-            className="contact__info">
+            className="contact__info"
+          >
             <div className="contact__card">
               <i className="bx bx contact__card-icon"></i>
               <h3 className="contact__card-title"></h3>
@@ -127,9 +154,16 @@ const Contact = () => {
             <motion.div
               initial={{ opacity: 0, y: -100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.3 }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 20,
+                duration: 1,
+                delay: 0.3,
+              }}
               viewport={{ once: true }}
-              className="contact__card">
+              className="contact__card"
+            >
               <i className="bx bx-mail-send contact__card-icon"></i>
               <h3 className="contact__card-title">Email</h3>
               <span className="contact__card-data">fanyanyanwu@gmail.com</span>
@@ -142,9 +176,16 @@ const Contact = () => {
             <motion.div
               initial={{ opacity: 0, y: -100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.5 }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 20,
+                duration: 1,
+                delay: 0.5,
+              }}
               viewport={{ once: true }}
-              className="contact__card">
+              className="contact__card"
+            >
               <i className="bx bxl-whatsapp contact__card-icon"></i>
               <h3 className="contact__card-title">Whatsapp</h3>
               <span className="contact__card-data">091-2739-1830</span>
@@ -157,9 +198,16 @@ const Contact = () => {
             <motion.div
               initial={{ opacity: 0, y: -100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.6 }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 20,
+                duration: 1,
+                delay: 0.6,
+              }}
               viewport={{ once: true }}
-              className="contact__card">
+              className="contact__card"
+            >
               <i className="bx bxl-messenger contact__card-icon"></i>
               <h3 className="contact__card-title">messenger</h3>
               <span className="contact__card-data">FlynDev</span>
@@ -175,11 +223,22 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: -100 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.7 }}
+          transition={{
+            type: "spring",
+            stiffness: 120,
+            damping: 20,
+            duration: 1,
+            delay: 0.7,
+          }}
           viewport={{ once: true }}
-          className="contact__content">
+          className="contact__content"
+        >
           <h3 className="contact__title">write to me your project</h3>
-          <form onSubmit={handleSubmit} id="contactForm" className="contact__form">
+          <form
+            onSubmit={handleSubmit}
+            id="contactForm"
+            className="contact__form"
+          >
             <div className="contact__form-div">
               <label className="contact__form-tag">Name</label>
               <input
@@ -218,23 +277,23 @@ const Contact = () => {
                 required
               ></textarea>
             </div>
+
             <button
               type="submit"
               className="button button--flex"
               disabled={loading}
             >
-              {loading ? 'Sending...' : 'send message'}
+              {loading ? "Sending..." : "send message"}
               <i className="bx bxs-send"></i>
             </button>
           </form>
           {success && (
-            <div className="success-message">Message sent successfully!
+            <div className="success-message">
+              Message sent successfully!
               <i className="bx bxs-success"></i>
             </div>
           )}
-          {error && (
-            <div className="error-message">{error}</div>
-          )}
+          {error && <div className="error-message">{error}</div>}
         </motion.div>
       </div>
     </section>

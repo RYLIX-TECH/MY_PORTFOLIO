@@ -6,10 +6,12 @@ import Hero from "./Components/Hero/Hero";
 import About from "./Components/About/About";
 import Skills from "./Components/Skills/Skills";
 import Service from "./Components/Services/Service";
+// import Wave from "";
 import Qualification from "./Components/Qualification/Qualification";
 import Testimonial from "./Components/Testimonial/Testimonial";
 import Contact from "./Components/Contact/Contact";
 import Portfolio from "./Components/Portfolio/Portfolio";
+
 import { useState, useEffect } from "react";
 
 function App() {
@@ -86,7 +88,9 @@ function App() {
       <main className="main">
         <Hero />
         <About />
+        
         <Skills />
+        {/* <Wave/> */}
         <Service />
         <Portfolio />
         <Qualification />
