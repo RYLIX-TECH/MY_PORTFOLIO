@@ -1,15 +1,14 @@
 import React from 'react'
 import { motion } from "motion/react";
 
-
 const ScrollDown = () => {
   return (
    <motion.div
-   whileInView={{y:[10,0,10,0,10,0,Infinity]}}
+   animate={{ y: [10, 0, 10] }} // Removed Infinity
    transition={{
-    duration:1,
-    delay:0.2,
-    type:'tween'
+    duration: 1,
+    repeat: Infinity, // Added repeat for infinite looping
+    type: 'tween'
    }}
    className="home__scroll">
     <a href="#About" className="home__scroll-button button--flex">

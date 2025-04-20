@@ -5,8 +5,10 @@ const Button = () => {
   return (
     <StyledWrapper>
       <button className='button__btn'>
+        <div className="shine"></div>
         <a href="#contact" className="button button--flex box">
-            say hello <i className='bx bxs-send'></i>
+          hire me now <i className='bx bxs-send'></i>
+           
         </a>
       </button>
     </StyledWrapper>
@@ -15,8 +17,10 @@ const Button = () => {
 
 const StyledWrapper = styled.div`
 .button__btn{
+  position:relative;
     margin:0;
     border-radius:5px;
+    overflow:hidden;
 }
   .box {
     // width: 140px;

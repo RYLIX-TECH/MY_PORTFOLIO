@@ -1,7 +1,7 @@
 import './Contact.css';
 import { motion } from 'motion/react';
 import emailjs from 'emailjs-com';
-import { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 
 /**
  * @function Contact
@@ -39,10 +39,10 @@ import { useState } from 'react';
  * @property {string} formData.project - The project description entered in the form.
  *
  * @property {function} emailjs.send - The EmailJS function to send the email.
- * @param {string} service_3x622o2 - The EmailJS service ID.
- * @param {string} template_mcmcixg - The EmailJS template ID.
- * @param {object} templateParams - The parameters to pass to the EmailJS template.
- * @param {string} A02LoOILweqDkxDS0 - The EmailJS public key.
+ * @param {string} REACT_APP_EMAILJS_SERVICE_ID - The EmailJS service ID from environment variables.
+ * @param {string} REACT_APP_EMAILJS_TEMPLATE_ID - The EmailJS template ID from environment variables.
+ * @param {object} sanitizedData - The sanitized parameters to pass to the EmailJS template.
+ * @param {string} REACT_APP_EMAILJS_PUBLIC_KEY - The EmailJS public key from environment variables.
  *
  * @returns {JSX.Element} A section containing contact information and a form to submit project details.
  * Includes success and error messages based on form submission status.
@@ -57,41 +57,48 @@ const Contact = () => {
     project: ''
   });
 
-  const handleSubmit = (e) => {
+  const sanitizedData = useMemo(() => ({
+    from_name: formData.name.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+    from_email: formData.email.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+    project_description: formData.project.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+  }), [formData]);
+
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.project.trim()) {
+      setError('All fields are required.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setError('Invalid email format.');
+      return;
+    }
     setLoading(true);
     setError('');
-  
-    const { name, email, project } = formData;
-  
-    const templateParams = {
-      from_name: name,             // from_name is the key for name in the template
-      from_email: email,           // from_email is the key for email in the template
-      project_description: project // project_description is the key for project in the template
-    };
-  
-    // Send email using EmailJS 
-    // console.log(formData); // Checking the form data in the console for debugging
-  
-    emailjs.send('service_3x622o2', 'template_mcmcixg', templateParams, 'A02LoOILweqDkxDS0')
+
+    emailjs.send(
+      import.meta.env.VITE_REACT_APP_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_REACT_APP_EMAILJS_TEMPLATE_ID,
+      sanitizedData,
+      `${import.meta.env.VITE_REACT_APP_EMAILJS_PUBLIC_KEY}`
+    )
       .then(() => {
         setSuccess(true);
         setFormData({ name: '', email: '', project: '' });
       })
       .catch((err) => {
-        setError('Failed to send message. Please try again later.');
+        setError('Failed to send message. Please check your internet connection.');
         console.error('Email sending failed', err);
       })
       .finally(() => setLoading(false));
-  };
-  
+  }, [sanitizedData, formData]);
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-  };
+  }, [formData]);
 
   return (
     <section className="contact section" id="contact">
@@ -104,8 +111,8 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: -100 }}
             whileInView={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.1 }}
-              viewport={{once:true}}
+            transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.1 }}
+            viewport={{ once: true }}
             className="contact__info">
             <div className="contact__card">
               <i className="bx bx contact__card-icon"></i>
@@ -120,8 +127,8 @@ const Contact = () => {
             <motion.div
               initial={{ opacity: 0, y: -100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.3 }}
-                viewport={{once:true}}
+              transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.3 }}
+              viewport={{ once: true }}
               className="contact__card">
               <i className="bx bx-mail-send contact__card-icon"></i>
               <h3 className="contact__card-title">Email</h3>
@@ -135,9 +142,8 @@ const Contact = () => {
             <motion.div
               initial={{ opacity: 0, y: -100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.5 }}
-              viewport={{once:true}}
-
+              transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.5 }}
+              viewport={{ once: true }}
               className="contact__card">
               <i className="bx bxl-whatsapp contact__card-icon"></i>
               <h3 className="contact__card-title">Whatsapp</h3>
@@ -151,8 +157,8 @@ const Contact = () => {
             <motion.div
               initial={{ opacity: 0, y: -100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.6 }}
-              viewport={{once:true}}
+              transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.6 }}
+              viewport={{ once: true }}
               className="contact__card">
               <i className="bx bxl-messenger contact__card-icon"></i>
               <h3 className="contact__card-title">messenger</h3>
@@ -169,9 +175,8 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: -100 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: "120", damping: "20", duration: 1, delay: 0.7 }}
-          viewport={{once:true}}
-
+          transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.7 }}
+          viewport={{ once: true }}
           className="contact__content">
           <h3 className="contact__title">write to me your project</h3>
           <form onSubmit={handleSubmit} id="contactForm" className="contact__form">

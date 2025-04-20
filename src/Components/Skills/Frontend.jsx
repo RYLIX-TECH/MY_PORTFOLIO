@@ -18,6 +18,8 @@ const Frontend = () => {
       viewport={{ once: true }}
       className="skills__content"
     >
+      {/* <div className="shine"></div> */}
+
       <h3 className="skills__title"> Frontend developer</h3>
       <div className="skills__box">
         <div className="skills__group">

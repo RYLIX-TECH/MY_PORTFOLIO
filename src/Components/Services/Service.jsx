@@ -8,6 +8,7 @@ import "./Services.css";
 const ServiceModal = memo(({ isOpen, onClose, title, description }) => (
   <div className={isOpen ? "services__modal active-modal" : "services__modal"}>
     <div className="services__modal-content">
+
       <i onClick={onClose} className="uil uil-times services__modal-close"></i>
       <h3 className="services__modal-title">{title}</h3>
       <p className="services__modal-description">{description}</p>
@@ -49,6 +50,8 @@ const ServiceCard = memo(({ icon, title, index, isActive, onToggle }) => (
     damping:'20'
   }}
   className="service__content">
+            <div className="shine"></div>
+
     <div>
       <i className={`uil ${icon} services__icon`}></i>
       <h3 className='services__title'>{title}</h3>

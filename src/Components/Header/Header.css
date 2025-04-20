@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
+
 .header{
     width: 100%;
     position: fixed;
@@ -25,6 +27,11 @@
 .nav__toggle{
     color: var(--title-color);
     font-weight: var(--font-medium);
+    text-transform: uppercase;
+    font-family: "Winky Sans";
+    font-optical-sizing: auto;
+    font-style: normal;
+    letter-spacing: 1px;
 
 }
 .nav__list{
@@ -40,6 +47,9 @@
     font-weight: var(--font-medium);
     transition: .4s;
     letter-spacing: 1px;
+    font-family: "Winky Sans";
+    font-optical-sizing: auto;
+    font-style: normal;
 
 }
 .nav__icon,
