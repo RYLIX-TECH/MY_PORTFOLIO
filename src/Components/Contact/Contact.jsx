@@ -1,7 +1,10 @@
 import './Contact.css';
 import { motion } from 'motion/react';
 import emailjs from 'emailjs-com';
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import Social from '../Hero/Social-fi copy';
+import Notification from './Notification';
+
 
 /**
  * @function Contact
@@ -51,11 +54,31 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const [notificationType, setNotificationType] = useState('');
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     project: ''
   });
+
+  // Reset success state after 5 seconds
+  useEffect(() => {
+    if (success || error) {
+      setShowNotification(true);
+      setNotificationMessage(success ? 'Message sent successfully!' : error);
+      setNotificationType(success ? 'success' : 'error');
+      
+      const timer = setTimeout(() => {
+        setSuccess(false);
+        setError('');
+      }, 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [success, error]);
 
   const sanitizedData = useMemo(() => ({
     from_name: formData.name.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
@@ -99,6 +122,10 @@ const Contact = () => {
       [e.target.name]: e.target.value
     });
   }, [formData]);
+
+  const handleCloseNotification = () => {
+    setShowNotification(false);
+  };
 
   return (
     <section className="contact section" id="contact">
@@ -169,6 +196,15 @@ const Contact = () => {
                 <i className="bx bx-right-arrow-alt contact__button-icon"></i>
               </a>
             </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: -100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.6 }}
+              viewport={{ once: true }}
+              className="contact__card">
+             <Social className=""></Social>
+            </motion.div>
+        
           </motion.div>
         </div>
 
@@ -178,6 +214,7 @@ const Contact = () => {
           transition={{ type: 'spring', stiffness: 120, damping: 20, duration: 1, delay: 0.7 }}
           viewport={{ once: true }}
           className="contact__content">
+
           <h3 className="contact__title">write to me your project</h3>
           <form onSubmit={handleSubmit} id="contactForm" className="contact__form">
             <div className="contact__form-div">
@@ -220,23 +257,23 @@ const Contact = () => {
             </div>
             <button
               type="submit"
-              className="button button--flex"
+              className="button button--flex card"
               disabled={loading}
             >
               {loading ? 'Sending...' : 'send message'}
               <i className="bx bxs-send"></i>
             </button>
           </form>
-          {success && (
-            <div className="success-message">Message sent successfully!
-              <i className="bx bxs-success"></i>
-            </div>
-          )}
-          {error && (
-            <div className="error-message">{error}</div>
-          )}
         </motion.div>
       </div>
+
+      {/* Notification component */}
+      <Notification 
+        show={showNotification}
+        type={notificationType}
+        message={notificationMessage}
+        onClose={handleCloseNotification}
+      />
     </section>
   );
 };

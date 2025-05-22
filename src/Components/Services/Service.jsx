@@ -6,7 +6,7 @@ import { motion,} from "motion/react"
 import "./Services.css";
 
 const ServiceModal = memo(({ isOpen, onClose, title, description }) => (
-  <div className={isOpen ? "services__modal active-modal" : "services__modal"}>
+  <div className={isOpen ? "services__modal active-modal " : "services__modal"}>
     <div className="services__modal-content">
 
       <i onClick={onClose} className="uil uil-times services__modal-close"></i>
@@ -49,7 +49,7 @@ const ServiceCard = memo(({ icon, title, index, isActive, onToggle }) => (
     stiffness:'200',
     damping:'20'
   }}
-  className="service__content">
+  className="service__content card">
             <div className="shine"></div>
 
     <div>

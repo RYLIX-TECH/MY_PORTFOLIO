@@ -41,9 +41,14 @@ const Testimonial = () => {
           return (
             <SwiperSlide className='testimonial__card' key={id}>
               <div className="shine"></div>
-              <img src={image} alt="" className='testimonial__img' />
+              <div className=" card1">
+              <img  src={image} alt="" className='testimonial__img card' />
+              <div className="text">
+
               <h3 className="testimonial__name">{title}</h3>
               <p className="testimonial__description">{description}</p>
+              </div>
+              </div>
             </SwiperSlide>
           )
         })}

@@ -29,7 +29,7 @@ const LoadingScreen = ({ className }) => {
         // Remove no-scroll class from body when component unmounts
         document.body.classList.remove('no-scroll');
       }, 1000); // This should match the animation duration in CSS
-    }, 5000); // 5 seconds delay
+    }, 3000); // 3 seconds delay
 
     return () => {
       clearTimeout(timer);

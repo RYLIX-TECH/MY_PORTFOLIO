@@ -78,7 +78,7 @@ const StyledWrapper = styled.div`
     left: var(--slider-offset, 0.3em);
     top: 50%;
     transform: translateY(-50%);
-    background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+    background: linear-gradient(40deg, #ffffff33, #2a2a2a 70%);
     transition: 0.4s;
   }
 

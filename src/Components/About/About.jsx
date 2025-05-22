@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import './About.css'
 // import cv
-import AboutImg from "../../assets/About22.png.png"
+import AboutImg from "../../assets/Snapchat-2.jpg"
 import AboutInfo from './About-info.jsx'
 import { motion } from "motion/react"
 

@@ -7,7 +7,7 @@ import Data from "./Data";
 import ScrollDown from "./ScrollDown.jsx";
 import { motion } from "motion/react";
 import Switch from "../Button/Switch";
-// import ColorPicker from "../colorMode/Color.jsx";
+
 
 const Hero = () => {
   const animationConfig = useMemo(

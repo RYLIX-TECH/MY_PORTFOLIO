@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Header from "./Components/Header/Header";
 import "./App.css";
 import Hero from "./Components/Hero/Hero";
@@ -9,16 +9,14 @@ import Qualification from "./Components/Qualification/Qualification";
 import Contact from "./Components/Contact/Contact";
 import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
 import CustomCursor from './Components/CustomCursor/CustomCursor';
-import LoadingSpinner from './Components/Common/LoadinSpinner';
 import ScrollProgress from './Components/Common/ScrollProgress';
 import BackToTop from './Components/Common/BackToTop';
 import SectionNav from './Components/Common/SectionNav';
 import ErrorBoundary from './Components/Common/ErrorBoundary';
 import { isMobileDevice } from './utils/sanitize';
-// import { sanitizeInput } from './utils/sanitize';
-
-const Testimonial = lazy(() => import("./Components/Testimonial/Testimonial"));
-const Portfolio = lazy(() => import("./Components/Portfolio/Portfolio"));
+import TechStack from "./Components/TechStack/TechStack";
+import Testimonial from "./Components/Testimonial/Testimonial";
+import Portfolio from "./Components/Portfolio/Portfolio";
 
 function App() {
   const [isNotified, setIsNotified] = useState(false);
@@ -53,34 +51,30 @@ function App() {
     }
   }, [review]);
 
-  const mainContent = useMemo(() => (
-    <main>
-      <Hero />
-      <About />
-      <Skills />
-      <Service />
-      <Suspense fallback={<LoadingSpinner className="load" />}>
-        <Portfolio />
-      </Suspense>
-      <Qualification />
-      <Suspense fallback={<LoadingSpinner className="load" />}>
-        <Testimonial />
-      </Suspense>
-      <Contact />
-    </main>
-  ), []);
-
   return (
-    <ErrorBoundary>
-      <CustomCursor />
-      {!isMobile && <LoadingScreen />}
-      <Header />
-      {mainContent}
-      <ScrollProgress />
-      <BackToTop />
-      <SectionNav />
-      {/* Notification and review logic can be extracted to a separate component if needed */}
-    </ErrorBoundary>
+    <>
+      <ErrorBoundary>
+        <CustomCursor />
+        {!isMobile && <LoadingScreen />}
+        <Header />
+        
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Service />
+          <TechStack/>
+          <Portfolio />
+          <Qualification />
+          <Testimonial />
+          <Contact />
+        </main>
+        
+        <ScrollProgress />
+        <BackToTop />
+        <SectionNav />
+      </ErrorBoundary>
+    </>
   );
 }
 

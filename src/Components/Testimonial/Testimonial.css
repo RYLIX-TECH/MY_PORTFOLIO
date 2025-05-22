@@ -11,15 +11,17 @@
     position: relative;
     margin-bottom: var(--mb-3);
     overflow: hidden;
-
+    box-shadow: var(--box-shadow-btn);
+}
+.card1{
+    display: flex;
 }
 
-
 .testimonial__img{
-    width: 50px;
+    width: 100px;
     border-radius: 100%;
     margin-right: var(--mb-1);
-    height: 50px;
+    height: 100px;
 
 }
 .testimonial__name{
@@ -54,6 +56,13 @@
     .testimonial__container{
         width: 100%;
     }
+    .card1{
+        flex-direction: column;
+    }
+    .text{
+        padding: 10px 0 10px 0;
+    }
+ 
     .testimonial__card{
         padding: 2rem 1.5rem;
     }

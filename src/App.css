@@ -2,7 +2,7 @@
 /** @format */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&0display=swap');
 
 :root {
   --header-height: 3rem;
@@ -12,8 +12,10 @@
   --title-color-dark: hsl(var(--hue), var(--sat), 0%);
   --text-color: hsl(var(--hue), var(--sat), 26%);
   --body-color: hsl(var(--hue), var(--sat), 78%);
-  --container-color: #f0eded;
+    --container-color: rgb(223, 219, 219);
+    ;
   --notification-bg: rgba(255, 255, 255, 0.98);
+  --services-modal:rgb(223, 219, 219);
   --notification-header-color: rgba(17, 24, 39, 0.9);
   --notification-text-color: rgba(51, 51, 51, 0.9);
   --notification-close-color: rgba(107, 114, 128, 0.6);
@@ -38,13 +40,16 @@
   --mb-2: 2rem;
   --mb-2-5: 2.5rem;
   --mb-3: 3rem;
-  --z-tooltip: 10;
   --z-fixed: 100;
   --z-modal: 1000;
-  --border: 2px solid rgba(0, 0, 0, 0.3);
+  --border: 1px solid rgba(0, 0, 0, 0.3);
   --scrollbar-track: #f1f1f1;
   --scrollbar-thumb: #888;
   --scrollbar-thumb-hover: #555;
+  --box-shadow-btn:5px 20px 30px rgba(0, 0, 0, 0.2);
+  --transform-btn:translatey(-5px);
+  --tech-slide:rgba(0, 0, 0, 0.1);
+  --tech-slide-hover:rgba(0, 0, 0, 0.3);
 }
 
 /* Dark mode styles */
@@ -60,13 +65,18 @@ body.dark__mode {
   --notification-header-color: rgba(255, 255, 255, 0.9);
   --notification-text-color: rgba(200, 200, 200, 0.9);
   --notification-close-color: rgba(200, 200, 200, 0.6);
-  --container-color: #1a1a1a;
-  --border: 2px solid rgba(240, 222, 222, 0.3);
+  --container-color: rgb(24, 23, 23);
+  --services-modal:rgb(24, 23, 23);
+  --border: 1px solid rgba(231, 230, 230, 0.3);
+  --tech-slide:rgba(240, 233, 233, 0.568);
+  --tech-slide-hover:rgba(240, 233, 233, 0.781);
   --scrollbar-track: #2a2a2a;
   --scrollbar-thumb: #666;
   --scrollbar-thumb-hover: #888;
   background-image: url(../src//assets/color4bg_2025-02-07\ 18_55_26.png);
   background-blend-mode: multiply, multiply;
+  --box-shadow-btn:5px 20px 30px rgba(207, 202, 202, 0.1);
+
 }
 
 /* SHINE effect */
@@ -96,7 +106,7 @@ body.dark__mode {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
-  border-radius: 5px;
+  border-radius: 4px;
   transition: background 0.3s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -172,10 +182,7 @@ img {
   height: auto;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
-img:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
-}
+
 
 /* REUSABLE CSS CLASSES */
 .section {
@@ -206,16 +213,18 @@ img:hover {
 }
 .button {
   display: inline-block;
-  background-color: var(--title-color);
-  color: var(--container-color);
+  background-color: var(--container-color);
+  color: var(--text-color);
   padding: 1.25rem;
   border-radius: 1rem;
   font-weight: var(--font-medium);
   animation: scaleIn 0.5s ease-out;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #ffffff33;
+
 }
 .button:hover {
-  background-color: var(--title-color-dark);
+  /* background-color: var(--); */
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -238,6 +247,9 @@ img:hover {
     width: 22px;
     height: 22px;
   }
+  img{
+    max-width: 500px;
+  }
 }
 @media screen and (max-width: 768px) {
   body {
@@ -245,6 +257,9 @@ img:hover {
   }
   .section {
     padding: 2rem 4rem;
+  }
+  img{
+    max-width: 300px;
   }
   .section__subtitle {
     margin-bottom: var(--mb-3);
@@ -258,6 +273,9 @@ img:hover {
   .container {
     margin-left: var(--mb-1);
     margin-right: var(--mb-1);
+  }
+  img{
+    max-width: 200px;
   }
 }
 
@@ -473,7 +491,7 @@ img:hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .button:hover {
-  transform: translateY(-3px);
+  /* transform: translateY(-3px); */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 html {
@@ -491,8 +509,8 @@ img:hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform:var(--transform-btn);
+  box-shadow:var( --box-shadow-btn);
 }
 .nav__link {
   position: relative;

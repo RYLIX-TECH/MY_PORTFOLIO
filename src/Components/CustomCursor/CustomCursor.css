@@ -2,9 +2,9 @@
   position: fixed;
   width: 20px;
   height: 20px;
-  background-color: rgba(0, 0, 0, 0.8);
-  border: 2px solid white;
-  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.068);
+  border: 2.5px solid white;
+  border-radius: 100%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 10000;

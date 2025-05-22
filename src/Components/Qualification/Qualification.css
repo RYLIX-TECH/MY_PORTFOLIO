@@ -15,10 +15,16 @@
   color: var(--title-color);
   margin: 0 var(--mb-1);
   cursor: pointer;
+  padding: 2px;
 }
 .qualification__button:hover {
   color: var(--title-color-dark);
+  outline: 1.5px solid var(--title-color-dark);
+  border-radius: 5px;
+  
+  
 }
+
 .qualification__icon {
   font-size: 1.8rem;
   margin-right: var(-mb-0-25);

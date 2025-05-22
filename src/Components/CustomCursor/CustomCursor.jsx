@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './CustomCursor.css';
 
 const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 5, y: 10 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {

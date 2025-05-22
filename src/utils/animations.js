@@ -95,7 +95,7 @@ export const staggerContainer = {
 
 // Hover animations
 export const hoverScale = {
-  scale: 1.05,
+  scale: 1.06,
   transition: {
     duration: 0.3,
     ease: "easeInOut"
